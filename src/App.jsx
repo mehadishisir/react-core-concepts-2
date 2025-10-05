@@ -1,4 +1,6 @@
 import "./App.css";
+import Batsman from "./batsman";
+import Bowler from "./bowler";
 import Counter from "./counter";
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
   };
   return (
     <>
+      <Bowler />
+      <Batsman />
       <Counter />
       <h1>Vite + React</h1>
       <button onClick={handleClick1}>Test Button 1</button>
