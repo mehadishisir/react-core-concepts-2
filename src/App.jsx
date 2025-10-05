@@ -1,9 +1,27 @@
+import { Suspense } from "react";
 import "./App.css";
 import Batsman from "./batsman";
 import Bowler from "./bowler";
 import Counter from "./counter";
+import Users from "./user";
+import Friends from "./friends";
+import { Posts } from "./posts";
+// const fetchUser = fetch("https://jsonplaceholder.typicode.com/users").then(
+//   (response) => response.json()
+// );
+const fetchPost = async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return response.json();
+};
+// const fetchFriends = async () => {
+//   const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+// return response.json();
+// };
 
 function App() {
+  const postsPromise = fetchPost();
+  // const friendsPromise = fetchFriends();
   function handleClick1() {
     alert("Button 1 clicked");
   }
@@ -14,8 +32,19 @@ function App() {
     let result = num + 5;
     alert(result);
   };
+
   return (
     <>
+      <Suspense fallback={<h2>posts are loading...</h2>}>
+        <Posts postsPromise={postsPromise} />
+      </Suspense>
+      {/* <Suspense fallback={<h2>friends are comming for treat...</h2>}>
+        <Friends friendsPromise={friendsPromise} />
+      </Suspense> */}
+      {/* <Suspense fallback={<h2>Loading...</h2>}>
+        <Users fetchUser={fetchUser} />
+      </Suspense> */}
+
       <Bowler />
       <Batsman />
       <Counter />
